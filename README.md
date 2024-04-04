@@ -14,3 +14,32 @@ The `cdk.json` file tells the CDK Toolkit how to execute your app.
 * `cdk diff`        compare deployed stack with current state
 * `cdk synth`       emits the synthesized CloudFormation template
 # cdk-lambda
+
+
+Install dependencies
+
+```
+npm install
+```
+
+install "sharp" for lambda@edge
+
+```
+cd resources
+npm install --arch=x64 --platform=linux sharp
+```
+
+
+Go back to the root and run bootstrap the AWS CDK
+```
+npx cdk bootstrap -c originName={Origin domain}
+```
+
+Deploy the stack
+```
+npx cdk deploy -c originName={Origin domain}
+```
+
+Query Parameters
+
+https://dxxxxx.cloudfront.net/image/test.jpg?width=240&format=jpg
