@@ -40,6 +40,12 @@ Deploy the stack
 npx cdk deploy -c originName={Origin domain}
 ```
 
-Query Parameters
+# Query Parameters
 
 https://dxxxxx.cloudfront.net/image/test.jpg?width=240&format=jpg
+
+```
+npx cdk bootstrap -c originName="minimaxzoompic.s3.us-west-2.amazonaws.com"
+npx cdk synth -c originName="minimaxzoompic.s3.us-west-2.amazonaws.com"
+npx cdk deploy -c originName="minimaxzoompic.s3.us-west-2.amazonaws.com"
+```
