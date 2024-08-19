@@ -12,7 +12,7 @@ exports.handler = (event, context, callback) => {
   // Read the custom origin name
   console.log('jingamz!!')
   console.log(request)
-  const originname = request.origin.s3.domainName;
+  const originname = request.origin.custom.domainName;
   console.log(originname)	
   
   const parts = originname.split('.')
