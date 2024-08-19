@@ -5,14 +5,14 @@ const AWS = require('aws-sdk');
 
 // 初始化S3客户端
 const s3 = new AWS.S3();
-// 更改原始逻辑，从 S3 直接读取原始文件进行 sharp 操作并返回 jingamz@  20240331
+// 更改原始逻辑，从 S3 直接读取原始文件进行 sharp 操作并返回 jingamz@  20240818 change set
 exports.handler = (event, context, callback) => {
 
   const request = event.Records[0].cf.request;
   // Read the custom origin name
   console.log('jingamz!!')
   console.log(request)
-  const originname = request.origin.custom.domainName;
+  const originname = request.origin.s3.domainName;
   console.log(originname)	
   
   const parts = originname.split('.')
