@@ -12,7 +12,8 @@ exports.handler = (event, context, callback) => {
   // Read the custom origin name
   console.log('jingamz!!')
   console.log(request)
-  const originname = request.origin.custom.domainName;
+  const originname = request.origin.s3.domainName;
+  // 当cloudfront origin 设置为 s3 类型时，需要注意这里。 20240817 jingamz@
   console.log(originname)	
   
   const parts = originname.split('.')
