@@ -6,6 +6,6 @@ const app = new cdk.App();
 new CdkLambdaStack(app, 'MyCloudFrontStack',{
    // bucketName: 'minimaxzoompic',
     env: {
-        region: 'ap-southeast-1',
+        region: 'us-east-1',
       },
 });
