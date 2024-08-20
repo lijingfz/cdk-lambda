@@ -12,20 +12,22 @@ exports.handler = (event, context, callback) => {
   // Read the custom origin name
   console.log('jingamz!!')
   console.log(request)
-  const originname = request.origin.custom.domainName;
+  const originname = request.origin.s3.domainName;
   console.log(originname)	
   
   const parts = originname.split('.')
   const bucketName = parts[0]; // 替换成你的S3桶名称
   const objectKey = request.uri; 
+  const fileformat = objectKey.substring(objectKey.lastIndexOf(".")+1)
+  console.log('format',fileformat)
   console.log(bucketName);
   console.log(objectKey);
 
   var resizingOptions = {};
   const params = new URLSearchParams(request.querystring);
-  if (!params.has('width') || !params.has('format')) {
+  if (!params.has('width')) {
     // if there is no width parameter, just pass the request
-    console.log("no params");
+    console.log(" Need add width!");
     callback(null, request);
     return;
   }
@@ -36,26 +38,24 @@ exports.handler = (event, context, callback) => {
     Bucket: bucketName,
     Key: objectKey.slice(1),
   };
-
+  console.log('Check object key',objectKey.slice(1))
   s3.getObject(s3Params, function(err, data) {
     if (err) {
       console.error(err);
       callback(null, request); // 错误时返回原始请求
       return;
     }
-    // 检查文件类型是否为jpg
+    //检查文件类型是否为jpg
     if (!objectKey.endsWith('.jpg')) {
       console.error('File is not a jpg image.');
       callback(null, request);
       return;
-    }
-
-        
+    }      
     try {
       // Generate a response with resized image Sharp(binary)
       Sharp(data.Body)
         .resize(resizingOptions)
-        .toFormat(params.get('format'))
+        .toFormat(fileformat)
         .toBuffer()
         .then(output => {
           const base64String = output.toString('base64');
@@ -77,7 +77,7 @@ exports.handler = (event, context, callback) => {
               }],
               'content-type': [{
                 key: 'Content-Type',
-                value: 'image/' + params.get('format')
+                value: 'image/' + fileformat
               }]
             },
             bodyEncoding: 'base64',
