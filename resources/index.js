@@ -46,11 +46,11 @@ exports.handler = (event, context, callback) => {
       return;
     }
     //检查文件类型是否为jpg
-    if (!objectKey.endsWith('.jpg')) {
-      console.error('File is not a jpg image.');
-      callback(null, request);
-      return;
-    }      
+    // if (!objectKey.endsWith('.jpg')) {
+    //   console.error('File is not a jpg image.');
+    //   callback(null, request);
+    //   return;
+    // }      
     try {
       // Generate a response with resized image Sharp(binary)
       Sharp(data.Body)
