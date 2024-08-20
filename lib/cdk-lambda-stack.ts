@@ -55,7 +55,7 @@ export class CdkLambdaStack extends Stack {
           path.join(__dirname, '../resources')
         ),
         handler: 'index.handler',
-        role: lambdaRole, 
+        // role: lambdaRole, 
         runtime: lambda.Runtime.NODEJS_LATEST,
         memorySize: 512,
         timeout: Duration.seconds(20),
