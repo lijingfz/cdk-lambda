@@ -36,3 +36,6 @@ npx cdk bootstrap -c originName="xxxxxxxxx.s3.us-west-2.amazonaws.com"
 npx cdk synth -c originName="xxxxxxxxx.s3.us-west-2.amazonaws.com"
 npx cdk deploy -c originName="xxxxxxxxx.s3.us-west-2.amazonaws.com"
 ```
+
+
+这是必须是 us-east-1 区域，原因是 edge@lambda函数 只能在美东1 被调用
